@@ -120,7 +120,7 @@
         
         <div class="text-center z-10 max-w-4xl mx-auto px-6">
             <h1 class="text-7xl font-bold mb-6 glow-text floating-animation">
-                Welcome to Home Page
+                Welcome to Home Jeffrey
             </h1>
             <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                 Discover the magic of movies - from Hollywood blockbusters to indie masterpieces, 
