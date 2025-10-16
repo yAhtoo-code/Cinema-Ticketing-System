@@ -1,9 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Student;
+use App\Http\Controllers\HomeController;
 
+// Movies page (root)
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('movies'); 
+})->name('movies');
+
+// Homepage
+Route::get('/homepage', [HomeController::class, 'index'])->name('homepage');
+
+
 
