@@ -12,7 +12,43 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        $genres = [
+            [
+                'title'=> 'All movies',
+                'data_genre' => 'all'
+            ], 
+            [
+                'title'=> 'Action',
+                'data_genre' => 'action'
+            ], 
+            [
+                'title'=> 'Adventure',
+                'data_genre' => 'adventure'
+            ],  
+            [
+                'title'=> 'Horror',
+                'data_genre' => 'horror'
+            ], 
+            [
+                'title'=> 'Thriller',
+                'data_genre' => 'thriller'
+            ],  
+            [
+                'title'=> 'Fantasy',
+                'data_genre' => 'fantasy'
+            ],
+            [
+                'title'=> 'Suspense',
+                'data_genre' => 'suspense'
+            ], 
+            [
+                'title'=> 'Sci-Fi',
+                'data_genre' => 'sci-fi'
+            ]
+        ];
+        return view('movies', [
+            'genres' => $genres,
+        ]);
     }
 
     /**
@@ -44,7 +80,7 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-        //
+        dd($movie);
     }
 
     /**
