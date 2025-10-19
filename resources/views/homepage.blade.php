@@ -1,35 +1,17 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ config('app.name', 'Cinematique') }}</title>
-    </head>
-    <link href="/css/style.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> 
+@extends('main')
+@section('content')
 
-<body class="relative">
-<div class="absolute inset-0 bg-black/70 z-0"></div>
-<div class="relative z-10">
+<section class="relative h-[800px] w-full">
+    <div class="relative z-10 flex flex-col justify-center h-full px-8 md:px-16 text-white max-w-3xl">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-yellow-400 leading-tight">
+        SECURE YOUR PERFECT MOVIE EXPERIENCE
+        </h1>
+        <p class="mt-4 text-lg text-gray-200 font-[Poppins]">Browse movies, select seats, and book tickets in</p> 
+        <p class="text-lg text-gray-200 font-[Poppins]">seconds. Your ultimate cinema booking platform </p> 
+        <p class="text-lg text-gray-200 font-[Poppins]">for unforgettable movie moments.</p> 
+        
+        <button class="mt-6 bg-red-600 hover:bg-red-700 text-white font-extrabold px-6 py-3 rounded-lg transition-colors w-fit" onclick="window.location.href='{{ url('/movies') }}'">BOOK NOW</button>
+    </div>
+</section>
 
-    <header>
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-               <img class="logo" src= "{{ asset('images/logo.png') }}" alt="Cinematique Logo">
-                    <div class="film-strip w-20 hidden md:block"></div>
-                </div>
-                <nav class="flex space-x-6">
-                    <button class="font-bold glow-text text-white transition-colors" onclick="showSection('home')">Home</button>
-                    <button class="font-bold glow-text text-white transition-colors" onclick="window.location.href='{{ url('/movies') }}'"> Movies</button>
-                    <button class="font-bold glow-text text-white transition-colors" onclick="showSection('genres')">Cinemas</button>
-                    <button class="font-bold glow-text text-white transition-colors" onclick="showSection('trending')">Events</button>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-</div>
-</body>
-</html>
+@endsection
