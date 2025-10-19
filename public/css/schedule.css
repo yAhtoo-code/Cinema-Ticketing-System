@@ -90,21 +90,18 @@ body {
   .cinema span {
     font-weight: bold;
   }
-
   .screen {
     text-align: center;
     margin: 20px 0;
-    color: #ccc;
+    color: white;
     letter-spacing: 2px;
   }
-
   .seat-layout {
     display: grid;
-    grid-template-columns: 40px auto;
+    grid-template-columns: 40px 1;
     gap: 10px;
-    align-items: start;
+    align-items: center;
   }
-
   .row-labels {
     display: grid;
     grid-template-rows: repeat(8, 40px);
@@ -113,13 +110,11 @@ body {
     font-weight: bold;
     color: #ccc;
   }
-
   .seat-section {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-
   .seat-numbers {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
@@ -129,20 +124,19 @@ body {
     font-size: 13px;
     margin-bottom: 8px;
   }
-
   .seat-grid {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     gap: 10px;
     justify-items: center;
   }
-
   .seat {
     width: 30px;
     height: 30px;
     cursor: pointer;
     fill: #555;
     transition: 0.2s;
+    justify-self: center;
   }
   .seat:hover {
     fill: #888;
@@ -154,7 +148,6 @@ body {
     fill: #222;
     cursor: not-allowed;
   }
-
   .summary {
     margin-top: 25px;
     background: #FFFFFF;
@@ -174,4 +167,23 @@ body {
   .summary button:disabled {
     background: #444;
     cursor: not-allowed;
+  }
+  .seat-wrapper {
+    display: grid;
+    grid-template-columns: 40px repeat(10, 1fr);
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .row-letter {
+    color: #ccc;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .seat-num {
+    color: #ccc;
+    font-size: 13px;
+    font-weight: 500;
+    justify-content:  center;
   }

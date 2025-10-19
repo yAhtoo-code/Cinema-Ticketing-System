@@ -22,9 +22,9 @@
                     <div class="film-strip w-20 hidden md:block"></div>
                 </div>
                 <nav class="flex space-x-6">
-                    <button class="font-bold glow-text" onclick="window.location.href='{{ url('/') }}'">Home</button>
-                    <button class="font-bold glow-text" onclick="window.location.href='{{ url('/movies') }}'"> Movies</button>
-                    <button class="font-bold glow-text" onclick="window.location.href='{{ url('/cinema') }}'">Cinemas</button>
+                    <button class="font-bold glow-text text-yellow-400 hover:text-yellow-200" onclick="window.location.href='{{ url('/') }}'">Home</button>
+                    <button class="font-bold glow-text text-yellow-400 hover:text-yellow-200" onclick="window.location.href='{{ url('/movies') }}'"> Movies</button>
+                    <button class="font-bold glow-text text-yellow-400 hover:text-yellow-200" onclick="window.location.href='{{ url('/cinema') }}'">Cinemas</button>
                 </nav>
             </div>
         </div>

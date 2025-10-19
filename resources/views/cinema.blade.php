@@ -1,8 +1,8 @@
 @extends('main')
 @section('content')
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl text-white font-bold mb-6 glow-text">Cinema Branches</h1>
-        <div class="cinema-branches-container p-6 mx-auto max-w-7xl">
+        <h1 class="text-5xl text-white font-bold mb-6 glow-text">Cinema Branches</h1>
+        <div class="cinema-branches-container p-6 mx-auto max-w-[1600px]">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             <div class="branch-card bg-gray-900 text-white rounded-lg p-5 shadow-lg border border-gray-700">
