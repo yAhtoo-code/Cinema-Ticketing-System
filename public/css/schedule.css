@@ -324,3 +324,45 @@ input {
     }
 }
 
+/* 🎟 CINEMATIQUE TICKET STYLE */
+.pdf-ticket {
+    background: #fff;
+    color: #000;
+    border-radius: 10px;
+    padding: 20px 25px;
+    width: 100%;
+    max-width: 420px;
+    font-family: "Poppins", sans-serif;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.ticket-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.ticket-header h2 {
+    font-size: 1.2rem;
+    color: #8E0204;
+    margin-top: 8px;
+}
+
+.ticket-footer {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px dashed #ccc;
+    padding-top: 10px;
+}
+
+.ticket-qr {
+    display: block;
+    margin: 10px auto;
+    width: 100px !important;
+    height: 100px !important;
+}
+
+.ticket-id {
+    font-size: 0.8rem;
+    color: black;
+    margin-top: 5px;
+}

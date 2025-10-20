@@ -42,22 +42,23 @@ const seatWrapper = document.getElementById("seatWrapper");
 
 function seatSVG(id, booked = false) {
   return `
-        <svg class="seat ${booked ? "booked" : ""}" data-id="${id}"
-          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-          <rect x="8" y="20" width="48" height="30" rx="8" ry="8"/>
-          <rect x="18" y="50" width="28" height="8" rx="2" ry="2"/>
-        </svg>`;
+    <svg class="seat ${booked ? "booked" : ""}" data-id="${id}"
+      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+      <rect x="8" y="20" width="48" height="30" rx="8" ry="8"/>
+      <rect x="18" y="50" width="28" height="8" rx="2" ry="2"/>
+    </svg>`;
 }
+
 // Seat Layout
 seatWrapper.innerHTML = `
-      <div></div>
-      ${Array.from({ length: cols }, (_, i) => `<div class="seat-num">${i + 1}</div>`).join("")}
-    `;
+  <div></div>
+  ${Array.from({ length: cols }, (_, i) => `<div class="seat-num">${i + 1}</div>`).join("")}
+`;
 rows.forEach(row => {
   seatWrapper.innerHTML += `
-        <div class="row-letter">${row}</div>
-        ${Array.from({ length: cols }, (_, i) => seatSVG(`${row}${i + 1}`, Math.random() < 0.1)).join("")}
-      `;
+    <div class="row-letter">${row}</div>
+    ${Array.from({ length: cols }, (_, i) => seatSVG(`${row}${i + 1}`, Math.random() < 0.1)).join("")}
+  `;
 });
 
 // Seat Selection Logic
@@ -100,74 +101,135 @@ function updateTotal() {
   proceedBtn.disabled = selected.length === 0;
 }
 
-/* Payment */
-// Open the modal when Proceed button is clicked
-document.getElementById("proceedBtn").addEventListener("click", () => {
-  const modal = document.getElementById("paymentModal");
+/* -------------------- PAYMENT MODAL -------------------- */
+const paymentModal = document.getElementById("paymentModal");
+const paymentForm = document.getElementById("paymentForm");
+const paymentFields = document.getElementById("paymentFields");
+const paymentContent = document.getElementById("paymentContent");
+const paymentSuccess = document.getElementById("paymentSuccess");
+const proceedBtn = document.getElementById("proceedBtn");
+
+/* ---- Open modal ---- */
+proceedBtn.addEventListener("click", () => {
+  paymentForm.reset();
+  paymentFields.innerHTML = "";
+  paymentSuccess.classList.add("hidden");
+  paymentContent.classList.remove("hidden");
+
   document.getElementById("paymentTotal").textContent =
     document.getElementById("finalTotal").textContent;
-  modal.classList.remove("hidden");
+
+  paymentModal.classList.remove("hidden");
 });
 
-// Close modal
+/* ---- Close modal ---- */
 document.getElementById("cancelPayment").addEventListener("click", () => {
-  document.getElementById("paymentModal").classList.add("hidden");
-  document.getElementById("paymentForm").reset();
-  document.getElementById("paymentFields").innerHTML = "";
+  closePaymentModal();
 });
 
-// Dynamically show fields based on selected payment method
+function closePaymentModal() {
+  paymentModal.classList.add("hidden");
+  paymentForm.reset();
+  paymentFields.innerHTML = "";
+  paymentSuccess.classList.add("hidden");
+  paymentContent.classList.remove("hidden");
+}
+
+/* ---- Payment method fields ---- */
 document.getElementById("paymentMethod").addEventListener("change", function () {
-  const fields = document.getElementById("paymentFields");
-  fields.innerHTML = "";
+  paymentFields.innerHTML = "";
 
-  switch (this.value) {
-    case "gcash":
-      fields.innerHTML = `
-        <label>GCash Number:</label>
-        <input type="text" name="gcash_number" placeholder="09XXXXXXXXX" required>
-      `;
-      break;
-
-    case "paymaya":
-      fields.innerHTML = `
-        <label>PayMaya Account Email:</label>
-        <input type="email" name="paymaya_email" placeholder="you@example.com" required>
-        <label>Reference Number:</label>
-        <input type="text" name="paymaya_ref" placeholder="Enter reference number" required>
-      `;
-      break;
-
-    case "credit_card":
-    case "debit_card":
-      fields.innerHTML = `
-        <label>Card Number:</label>
-        <input type="text" name="card_number" placeholder="XXXX XXXX XXXX XXXX" required>
-        <label>Expiry Date:</label>
-        <input type="month" name="expiry" required>
-        <label>CVV:</label>
-        <input type="text" name="cvv" maxlength="3" required>
-      `;
-      break;
+  if (this.value === "gcash") {
+    paymentFields.innerHTML = `
+      <label>GCash Number:</label>
+      <input type="text" name="gcash_number" placeholder="09XXXXXXXXX" required>
+    `;
+  } else if (this.value === "paymaya") {
+    paymentFields.innerHTML = `
+      <label>PayMaya Account Number:</label>
+      <input type="text" name="paymaya_number" placeholder="09XXXXXXXXX" required>
+    `;
+  } else if (this.value === "credit_card" || this.value === "debit_card") {
+    paymentFields.innerHTML = `
+      <label>Card Number:</label>
+      <input type="text" name="card_number" placeholder="XXXX XXXX XXXX XXXX" required>
+      <label>Expiry Date:</label>
+      <input type="month" name="expiry" required>
+      <label>CVV:</label>
+      <input type="text" name="cvv" maxlength="3" required>
+    `;
   }
 });
 
-// Handle form submission
-document.getElementById("paymentForm").addEventListener("submit", function (e) {
+/* ---- Payment Form Submit ---- */
+paymentForm.addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  const method = document.getElementById("paymentMethod").value;
-  const total = document.getElementById("paymentTotal").textContent;
-
-  alert(`✅ Payment Successful!
-Method: ${method.toUpperCase()}
-Amount: ₱${total}`);
-
-  // In a real system, you'd POST this data to your backend:
-  // - booking_id
-  // - payment_method_id
-  // - date_time
-  // - payment_total
-
-  document.getElementById("paymentModal").classList.add("hidden");
+  // Hide form, show success screen
+  paymentContent.classList.add("hidden");
+  paymentSuccess.classList.remove("hidden");
 });
+
+/* ---- Return Home ---- */
+document.getElementById("returnHome").addEventListener("click", () => {
+  closePaymentModal();
+  selected = [];
+  updateTotal();
+  window.location.href = "/";
+});
+
+
+
+
+
+
+
+  // // ✅ Generate unique ticket ID
+  // const ticketID = "CT-" + Math.floor(100000 + Math.random() * 900000);
+  // document.getElementById("ticketID").textContent = ticketID;
+
+  // // ✅ Prepare QR data
+  // const qrData = {
+  //   ticketID,
+  //   movie: document.getElementById("summaryMovieTitle").textContent,
+  //   branch: document.getElementById("summaryBranch").textContent,
+  //   seat: document.getElementById("seatList").textContent,
+  //   time: document.getElementById("summaryTime").textContent,
+  //   date: document.getElementById("summaryDate").textContent,
+  // };
+
+  // console.log("QR data:", JSON.stringify(qrData));
+
+  // // ✅ Get QR container and render QR
+  // const qrCanvas = document.getElementById("qrCode");
+  // if (!qrCanvas) {
+  //   console.error("QR canvas element not found!");
+  //   return;
+  // }
+  // qrCanvas.innerHTML = "";
+  // new QRCode(qrCanvas, {
+  //   text: JSON.stringify(qrData),
+  //   width: 100,
+  //   height: 100,
+  // });
+
+  // // ✅ Wait for QR to render visually
+  // await new Promise((r) => setTimeout(r, 1000));
+
+  // // ✅ Ensure payment summary is visible before capture
+  // const element = document.getElementById("paymentSummary");
+  // element.style.display = "block";
+
+  // // ✅ Small delay to let the browser visually render updates
+  // await new Promise((r) => setTimeout(r, 300));
+
+  // // ✅ Generate PDF
+  // const options = {
+  //   margin: [0.3, 0.3],
+  //   filename: `Cinematique_Ticket_${ticketID}.pdf`,
+  //   image: { type: "jpeg", quality: 0.98 },
+  //   html2canvas: { scale: 2, useCORS: true },
+  //   jsPDF: { unit: "in", format: "a5", orientation: "portrait" },
+  // };
+
+  // await html2pdf().set(options).from(element).save();
