@@ -5,13 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ config('app.name', 'Cinematique') }}</title>
     </head>
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> 
 
 <body class="relative"> 
-<div class="absolute inset-0 bg-black/70 z-0"></div> 
+<div class="absolute inset-0 bg-black/45 z-0"></div> 
 <div class="relative z-10">
 
     <header>
@@ -25,6 +25,7 @@
                     <button class="font-bold glow-text text-yellow-400 hover:text-yellow-200" onclick="window.location.href='{{ url('/') }}'">Home</button>
                     <button class="font-bold glow-text text-yellow-400 hover:text-yellow-200" onclick="window.location.href='{{ url('/movies') }}'"> Movies</button>
                     <button class="font-bold glow-text text-yellow-400 hover:text-yellow-200" onclick="window.location.href='{{ url('/cinema') }}'">Cinemas</button>
+                    <button class="font-bold glow-text text-yellow-400 hover:text-yellow-200" onclick="window.location.href='{{ url('/contact') }}'">Contact Us</button>
                 </nav>
             </div>
         </div>

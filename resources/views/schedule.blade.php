@@ -16,6 +16,7 @@
     <div class="section">
       <h3 class="text-white font-semibold pb-3">Select Cinema Branch</h3>
       <select id="cinemaBranchDropdown" name="cinema_branch" class="w-full p-3 text-black rounded-lg bg-white hover-amber-400 cursor-pointer">
+        <option value="" disabled selected>Select a Branch...</option>
         <option value="sm_megamall">SM Megamall</option>
         <option value="glorietta_4">Glorietta 4</option>
         <option value="robinsons_galleria">Robinsons Galleria</option>
@@ -57,7 +58,6 @@
       </div>
     </div>
 
-    
     <div class="section payment-summary" id="paymentSummary" style="display:none;">
       <h3 class="text-white font-semibold pb-3">Payment Summary</h3>
       <div class="bg-white rounded-lg p-4 text-black leading-relaxed">
@@ -80,108 +80,38 @@
     </div>
   </div>
 
-<script>
-    // Generate Dates
-    const dateContainer = document.getElementById("dates");
-    const today = new Date();
-    for (let i = 0; i < 5; i++) {
-      const d = new Date(today);
-      d.setDate(today.getDate() + i);
-      const el = document.createElement("div");
-      el.className = "option";
-      el.textContent = d.toDateString().split(" ").slice(0, 3).join(" ");
-      if (i === 0) el.classList.add("active");
-      dateContainer.appendChild(el);
-    }
+<!-- Payment Modal -->
+<div id="paymentModal" class="payment-modal hidden">
+  <div class="payment-content">
+    <h2>Complete Your Payment</h2>
 
-    // Option handling
-    function handleOptionGroup(id) {
-      document.querySelectorAll(`#${id} .option`).forEach(opt => {
-        opt.addEventListener("click", () => {
-          document.querySelectorAll(`#${id} .option`).forEach(o => o.classList.remove("active"));
-          opt.classList.add("active");
-          updateTotal();
-        });
-      });
-    }
-    handleOptionGroup("dates");
-    handleOptionGroup("times");
+    <form id="paymentForm">
+      <div class="form-group">
+        <label for="paymentMethod">Select Payment Method:</label>
+        <select id="paymentMethod" name="payment_method" required>
+          <option value="" disabled selected>Select a method</option>
+          <option value="gcash">GCash</option>
+          <option value="paymaya">PayMaya</option>
+          <option value="credit_card">Credit Card</option>
+          <option value="debit_card">Debit Card</option>
+        </select>
+      </div>
 
-    // Cinema type
-    let pricePerSeat = 250;
-    document.querySelectorAll(".cinema").forEach(cin => {
-      cin.addEventListener("click", () => {
-        document.querySelectorAll(".cinema").forEach(c => c.classList.remove("active"));
-        cin.classList.add("active");
-        pricePerSeat = parseInt(cin.dataset.price);
-        updateTotal();
-      });
-    });
+      <div id="paymentFields"></div>
 
-    // Generate Seats
-    const rows = ["A","B","C","D","E","F","G","H"];
-    const cols = 10;
-    const seatWrapper = document.getElementById("seatWrapper");
+      <div class="payment-total">
+        <strong>Total Amount:</strong> ₱<span id="paymentTotal">0</span>
+      </div>
 
-    function seatSVG(id, booked = false) {
-      return `
-        <svg class="seat ${booked ? "booked" : ""}" data-id="${id}"
-          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-          <rect x="8" y="20" width="48" height="30" rx="8" ry="8"/>
-          <rect x="18" y="50" width="28" height="8" rx="2" ry="2"/>
-        </svg>`;
-    }
+      <div class="payment-actions">
+        <button type="button" id="cancelPayment">Cancel</button>
+        <button type="submit" id="confirmPayment">Confirm Payment</button>
+      </div>
+    </form>
+  </div>
+</div>
 
-    seatWrapper.innerHTML = `
-      <div></div>
-      ${Array.from({ length: cols }, (_, i) => `<div class="seat-num">${i + 1}</div>`).join("")}
-    `;
-    rows.forEach(row => {
-      seatWrapper.innerHTML += `
-        <div class="row-letter">${row}</div>
-        ${Array.from({ length: cols }, (_, i) => seatSVG(`${row}${i + 1}`, Math.random() < 0.1)).join("")}
-      `;
-    });
-
-    // Seat Selection Logic
-    let selected = [];
-    seatWrapper.addEventListener("click", (e) => {
-      const seat = e.target.closest(".seat");
-      if (!seat || seat.classList.contains("booked")) return;
-      seat.classList.toggle("selected");
-      const id = seat.dataset.id;
-      if (selected.includes(id)) {
-        selected = selected.filter(s => s !== id);
-      } else {
-        selected.push(id);
-      }
-      updateTotal();
-    });
-
-    // Update Payment Summary
-    function updateTotal() {
-      const total = selected.length * pricePerSeat;
-      const paymentSummary = document.getElementById("paymentSummary");
-      paymentSummary.style.display = selected.length > 0 ? "block" : "none";
-
-      const movieTitle = document.querySelector("#movieTitleHeader")?.textContent || "-";
-      const branch = (document.getElementById("cinemaBranchDropdown").value || "").replace("_", " ").toUpperCase() || "-";
-      const date = document.querySelector("#dates .option.active")?.textContent || "-";
-      const time = document.querySelector("#times .option.active")?.textContent || "-";
-      const type = document.querySelector(".cinema.active h3")?.textContent || "-";
-
-      document.getElementById("summaryMovieTitle").textContent = movieTitle;
-      document.getElementById("summaryBranch").textContent = branch;
-      document.getElementById("summaryDate").textContent = date;
-      document.getElementById("summaryTime").textContent = time;
-      document.getElementById("summaryType").textContent = type;
-      document.getElementById("ticketCount").textContent = `${selected.length}x ₱${pricePerSeat}`;
-      document.getElementById("finalTotal").textContent = total.toLocaleString();
-      document.getElementById("seatList").textContent = selected.join(", ") || "None";
-
-      const proceedBtn = document.getElementById("proceedBtn");
-      proceedBtn.disabled = selected.length === 0;
-    }
-</script>
+<script src="js/schedule.js"></script>
+</body>
 
 @endsection

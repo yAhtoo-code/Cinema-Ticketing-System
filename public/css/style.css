@@ -5,10 +5,13 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000;
+    font-family: "Poppins", sans-serif;
 }
+
 .logo {
     height: 50px;
 }
+
 body {
     background-image: url('../images/homepage_bg.jpg');
     background-size: cover;
@@ -17,4 +20,3 @@ body {
     background-attachment: fixed;
     min-height: 100vh;
 }
-
