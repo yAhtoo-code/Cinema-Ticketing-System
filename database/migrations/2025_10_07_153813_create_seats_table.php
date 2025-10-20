@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('seats', function (Blueprint $table) {
             $table->id();
-            $table->string('status', 20)->default('Available')->comment('1 - Available | 2 - Booked | 3 - Reserved'); 
+            $table->string('status', 20)->default('Available')->comment('1 - Available | 2 - Booked'); 
             $table->string('name', 10)->comment('A 1-10 | B 1-10 | C 1-10');
             $table->timestamps();
         });

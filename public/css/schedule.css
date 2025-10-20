@@ -245,7 +245,7 @@ h1 {
 }
 
 .payment-content h2 {
-    color: #8E0204;
+    color: black;
     margin-bottom: 15px;
     text-align: center;
 }
@@ -265,7 +265,7 @@ select,
 input {
     width: 100%;
     padding: 8px 10px;
-    border: 2px solid #8E0204;
+    border: 2px solid black;
     border-radius: 6px;
     font-size: 14px;
 }
