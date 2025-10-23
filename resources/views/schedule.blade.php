@@ -9,9 +9,32 @@
 
 <body>
   <div class="movie_container">
-    <h1 class="text-4xl font-extrabold"><span id="movieTitleHeader">Transformers</span></h1>
-    <img class="w-60 h-75 object-cover" src="{{ asset('images/transformers.jpg') }}" alt="Transformers">
-    <div class="meta font-semibold pt-5">⭐ 8.5/10 | 142 min | Action, Thriller | R-18</div>
+    <div class="flex space-x-6">
+        
+        <img class="w-60 h-auto object-cover rounded-lg shadow-xl" 
+             src="{{ asset('images/transformers.jpg') }}" 
+             alt="Transformers">
+        
+        <div class="flex-grow text-white">
+            
+            <h1 class="text-4xl font-extrabold mb-3">
+                <span id="movieTitleHeader">Transformers</span>
+            </h1>
+
+            <div class="flex items-center font-semibold text-lg mb-2">
+                <span class="meta font-semibold">142 min | Action, Thriller | R-18</span>
+            </div>
+
+            <div class="mb-6 text-gray-200">
+                <p class="text-base leading-relaxed">
+                    Four years after the Chicago battle, the government is hunting down all Transformers. 
+                    Cade Yeager, a Texas mechanic, buys an old truck and discovers it's Optimus Prime, 
+                    forcing him into a new war against a powerful enemy faction and a nefarious government agency.
+                </p>
+            </div>
+            
+            </div>
+    </div>
 
     <div class="section">
       <h3 class="text-white font-semibold pb-3">Select Cinema Branch</h3>
@@ -33,13 +56,7 @@
 
     <div class="section">
       <h3 class="text-white font-semibold pb-3">Select Time</h3>
-      <div class="options" id="times">
-        <div class="option">10:00</div>
-        <div class="option">13:30</div>
-        <div class="option">16:00</div>
-        <div class="option">19:30</div>
-        <div class="option">22:00</div>
-      </div>
+      <div class="options" id="times"></div>
     </div>
 
     <div class="section">
@@ -84,14 +101,7 @@
         <p><strong>Seat(s):</strong> <span id="seatList">None</span></p>
         <p><strong>Type:</strong> <span id="summaryType">-</span></p>
         <p><strong>Ticket(s):</strong> <span id="ticketCount">0x ₱0</span></p>
-        <p><strong>Total Paid:</strong> ₱<span id="finalTotal">0</span></p>
-
-       <!-- <div class="ticket-footer">
-          <canvas id="qrCode" class="ticket-qr"></canvas>
-          <p>Show this QR at the cinema entrance</p>
-          <p class="ticket-id">Ticket ID: <span id="ticketID"></span></p>
-        </div>
-      </div>  -->
+        <p><strong>Total Payment:</strong> ₱<span id="finalTotal">0</span></p>
 
       <div class="text-right mt-4">
         <button id="proceedBtn" disabled
@@ -138,9 +148,7 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="js/schedule.js"></script>
+<script src="js/schedule.js"></script>
 </body>
 
 @endsection

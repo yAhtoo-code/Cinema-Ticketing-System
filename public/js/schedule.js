@@ -11,6 +11,47 @@ for (let i = 0; i < 5; i++) {
   dateContainer.appendChild(el);
 }
 
+// Generate Time
+const timeContainer = document.getElementById("times");
+const startTime = 10; // Start at 10:00 AM
+const totalSlots = 5; // Generate 5 slots 
+
+// Function to format 24-hour time to 12-hour (e.g., 13:30 -> 1:30 PM)
+function formatTime(hour, minute) {
+    const period = hour >= 12 ? 'PM' : 'AM';
+    const displayHour = hour % 12 || 12; // Converts 0 to 12 (midnight) and 13 to 1
+    const displayMinute = minute.toString().padStart(2, '0'); // Ensures 00, 30
+    return `${displayHour}:${displayMinute} ${period}`;
+}
+
+let currentHour = startTime;
+let currentMinute = 0;
+
+for (let i = 0; i < totalSlots; i++) {
+    // Format the time
+    const timeText = formatTime(currentHour, currentMinute);
+
+    // Create the element
+    const el = document.createElement("div");
+    el.className = "option";
+    el.textContent = timeText;
+
+    // Set the first slot as active (e.g., 1:00 PM)
+    if (i === 0) {
+        el.classList.add("active");
+    }
+
+    // Append to the container
+    timeContainer.appendChild(el);
+
+    // Increment time by 30 minutes
+    currentMinute += 180;
+    if (currentMinute >= 60) {
+        currentHour += 1;
+        currentMinute = 0;
+    }
+}
+
 // Option handling
 function handleOptionGroup(id) {
   document.querySelectorAll(`#${id} .option`).forEach(opt => {
@@ -177,59 +218,3 @@ document.getElementById("returnHome").addEventListener("click", () => {
   updateTotal();
   window.location.href = "/";
 });
-
-
-
-
-
-
-
-  // // ✅ Generate unique ticket ID
-  // const ticketID = "CT-" + Math.floor(100000 + Math.random() * 900000);
-  // document.getElementById("ticketID").textContent = ticketID;
-
-  // // ✅ Prepare QR data
-  // const qrData = {
-  //   ticketID,
-  //   movie: document.getElementById("summaryMovieTitle").textContent,
-  //   branch: document.getElementById("summaryBranch").textContent,
-  //   seat: document.getElementById("seatList").textContent,
-  //   time: document.getElementById("summaryTime").textContent,
-  //   date: document.getElementById("summaryDate").textContent,
-  // };
-
-  // console.log("QR data:", JSON.stringify(qrData));
-
-  // // ✅ Get QR container and render QR
-  // const qrCanvas = document.getElementById("qrCode");
-  // if (!qrCanvas) {
-  //   console.error("QR canvas element not found!");
-  //   return;
-  // }
-  // qrCanvas.innerHTML = "";
-  // new QRCode(qrCanvas, {
-  //   text: JSON.stringify(qrData),
-  //   width: 100,
-  //   height: 100,
-  // });
-
-  // // ✅ Wait for QR to render visually
-  // await new Promise((r) => setTimeout(r, 1000));
-
-  // // ✅ Ensure payment summary is visible before capture
-  // const element = document.getElementById("paymentSummary");
-  // element.style.display = "block";
-
-  // // ✅ Small delay to let the browser visually render updates
-  // await new Promise((r) => setTimeout(r, 300));
-
-  // // ✅ Generate PDF
-  // const options = {
-  //   margin: [0.3, 0.3],
-  //   filename: `Cinematique_Ticket_${ticketID}.pdf`,
-  //   image: { type: "jpeg", quality: 0.98 },
-  //   html2canvas: { scale: 2, useCORS: true },
-  //   jsPDF: { unit: "in", format: "a5", orientation: "portrait" },
-  // };
-
-  // await html2pdf().set(options).from(element).save();

@@ -11,7 +11,6 @@ Route::get('/', [HomeController::class, 'index'])->name('homepage');
 Route::get('/movies', [MovieController::class, 'index'])->name('movies');
 Route::get('/cinema', [CinemaController::class, 'index'])->name('cinema');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::get('/movies/{movie:id}', [MovieController::class, 'edit'])->name('movie.edit');
 Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedule');
 
 
