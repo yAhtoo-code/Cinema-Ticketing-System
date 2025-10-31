@@ -3,12 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Cinematique') }}</title>
     </head>
     <link href="css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> 
+    <script src="https://cdn.tailwindcss.com"></script> 
 
 <body class="relative"> 
 <div class="absolute inset-0 bg-black/45 z-0"></div> 
@@ -26,6 +26,13 @@
                     <a href="{{ route('movies') }}" class="font-bold glow-text text-yellow-400 hover:text-yellow-200">Movies</a>
                     <a href="{{ route('cinema') }}" class="font-bold glow-text text-yellow-400 hover:text-yellow-200">Cinemas</a>
                     <a href="{{ route('contact') }}" class="font-bold glow-text text-yellow-400 hover:text-yellow-200">Contact Us</a>
+
+                    @if(auth()->user() == null)
+                    <a href="{{ route('register') }}" class="font-bold glow-text text-yellow-400 hover:text-yellow-200">Sign Up</a>
+                    <a href="{{ route('login') }}" class="font-bold glow-text text-yellow-400 hover:text-yellow-200">Log In</a>
+                    @else
+                    <span class="text-yellow-400">Hi, {{ auth()->user()->details->full_name }}</span>
+                    @endif
                 </nav>
             </div>
         </div>

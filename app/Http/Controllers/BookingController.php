@@ -28,7 +28,33 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $booking = Booking::create([
+            'user_id' => auth()->id(),
+            'movie_id' => $request->input('movie_id'),
+            'movie_title' => $request->input('movie_title'),
+            'seats' => $request->input('seats'),
+            'date_time' => now(),
+            // 'total_amount' => $request->input('total')
+        ]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Booking created successfully!',
+        ]);
+    }
+
+    public function getBookedSeats($movie_id)
+    {
+        // Fetch booked seat data properly
+        $bookings = Booking::where('movie_id', $movie_id)->pluck('seats');
+
+        $bookedSeats = [];
+        foreach ($bookings as $seatString) {
+            if (!empty($seatString)) {
+                $bookedSeats = array_merge($bookedSeats, explode(',', $seatString));
+            }
+        }
+
+        return response()->json($bookedSeats);
     }
 
     /**

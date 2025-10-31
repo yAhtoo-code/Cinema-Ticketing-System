@@ -10,7 +10,16 @@
         <p class="text-lg text-gray-200 font-[Poppins]">seconds. Your ultimate cinema booking platform </p> 
         <p class="text-lg text-gray-200 font-[Poppins]">for unforgettable movie moments.</p> 
         
-        <button class="mt-6 bg-red-600 hover:bg-red-700 text-white font-extrabold px-6 py-3 rounded-lg transition-colors w-fit" onclick="window.location.href='{{ url('/movies') }}'">BOOK NOW</button>
+        <button class="mt-6 bg-red-600 hover:bg-red-700 text-white font-extrabold px-6 py-3 rounded-lg transition-colors w-fit" onclick="window.location.href='{{ url('/movies') }}'">BOOK NOW (CUSTOMER)</button>
+        
+        @if(auth()->user() != null)
+        @if(auth()->user()->type == '1')
+        <button class="mt-6 bg-red-600 hover:bg-red-700 text-white font-extrabold px-6 py-3 rounded-lg transition-colors w-fit" onclick="window.location.href='{{ url('/admin') }}'">(ADMIN) DASHBOARD</button>
+        @else
+        <button onclick="window.location.href='{{ route('logout') }}'" class="mt-6 bg-red-600 hover:bg-red-700 text-white font-extrabold px-6 py-3 rounded-lg transition-colors w-fit">Logout</button>
+        @endif
+        @endif
+        
     </div>
 </section>
 
