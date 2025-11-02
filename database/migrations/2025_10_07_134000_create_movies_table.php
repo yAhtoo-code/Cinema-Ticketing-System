@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
             $table->string('title', 100);
-            $table->integer('duration');
-            $table->string('rating', 10)->comment('1 - G | 2 - PG | 3 - R-13 | 4 - R-16 | 5 - R-18'); 
+            $table->string('rating', 10)->comment('1 - G | 2 - PG | 3 - R-13 | 4 - R-16 | 5 - R-18');
+            $table->string('duration');
+            $table->string('genre')->nullable();
+            $table->text('synopsis')->nullable();
+            $table->string('poster')->nullable();
             $table->timestamps();
         });
     }

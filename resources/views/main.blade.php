@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Cinematique') }}</title>
     </head>
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script> 
 
@@ -23,7 +23,7 @@
                 </div>
                 <nav class="flex space-x-6">
                     <a href="{{ route('homepage') }}" class="font-bold glow-text text-yellow-400 hover:text-yellow-200">Home</a>
-                    <a href="{{ route('movies') }}" class="font-bold glow-text text-yellow-400 hover:text-yellow-200">Movies</a>
+                    <a href="{{ route('movies.index') }}" class="font-bold glow-text text-yellow-400 hover:text-yellow-200">Movies</a>
                     <a href="{{ route('cinema') }}" class="font-bold glow-text text-yellow-400 hover:text-yellow-200">Cinemas</a>
                     <a href="{{ route('contact') }}" class="font-bold glow-text text-yellow-400 hover:text-yellow-200">Contact Us</a>
 

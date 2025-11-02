@@ -39,6 +39,7 @@ class BookingController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Booking created successfully!',
+            'booking_id' => $booking->id,
         ]);
     }
 
@@ -84,8 +85,15 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Booking $booking)
+    public function destroy($id)
     {
-        //
+        $booking = Booking::find($id);
+
+        if ($booking) {
+            $booking->delete();
+            return response()->json(['success' => true, 'message' => 'Unpaid booking deleted']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Booking not found'], 404);
     }
 }

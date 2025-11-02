@@ -188,8 +188,6 @@ proceedBtn.addEventListener("click", () => {
   paymentModal.classList.remove("hidden");
 });
 
-document.getElementById("cancelPayment").addEventListener("click", closePaymentModal);
-
 /* ==============================
    PAYMENT METHOD DYNAMIC FIELDS
 ================================= */
@@ -219,6 +217,7 @@ document.getElementById("paymentMethod").addEventListener("change", function () 
 /* ==============================
    BOOKING SUBMISSION (to DB)
 ================================= */
+let pendingBookingId = null;
 proceedBtn.addEventListener("click", async () => {
   const bookingData = {
     movie_id: document.querySelector("#movie_id").value,
@@ -238,6 +237,8 @@ proceedBtn.addEventListener("click", async () => {
 
     if (response.ok) {
       alert("Booking saved!");
+      pendingBookingId = result.booking_id;
+      document.querySelector("#booking_id").value = result.booking_id;
       loadSeats();
     } else alert(result.message || "Booking failed!");
   } catch (error) {
@@ -281,8 +282,14 @@ confirmPayment.addEventListener("click", async (e) => {
     const result = await response.json();
 
     if (response.ok && result.success) {
+      alert(result.message || "Payment Successful!");
       paymentContent.classList.add("hidden");
       paymentSuccess.classList.remove("hidden");
+      pendingBookingId = null;
+
+      const downloadLink = document.getElementById("downloadTicket");
+      downloadLink.href = `/ticket/download/${result.booking_id}`;
+
     } else {
       alert(result.message || "Payment failed!");
     }
@@ -290,6 +297,35 @@ confirmPayment.addEventListener("click", async (e) => {
     console.error("Error during payment:", error);
     alert("Something went wrong while processing payment.");
   }
+});
+
+async function deleteUnpaidBooking(bookingId) {
+  try {
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+    await fetch(`/booking/${bookingId}`, {
+      method: "DELETE",
+      headers: { "X-CSRF-TOKEN": token },
+    });
+    console.log(`Booking ${bookingId} deleted.`);
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+  }
+}
+
+/* ==============================
+   CANCEL BUTTON
+================================= */
+document.getElementById("cancelPayment").addEventListener("click", async () => {
+  if (pendingBookingId) {
+    await deleteUnpaidBooking(pendingBookingId);
+    pendingBookingId = null;
+  }
+  closePaymentModal();
+  selected = [];
+  updateTotal();
+
+  await loadSeats();
+  window.location.reload();
 });
 
 /* ==============================
@@ -301,3 +337,19 @@ document.getElementById("returnHome").addEventListener("click", () => {
   updateTotal();
   window.location.href = "/movies";
 });
+
+/* =====================================================
+   THE BOOKED WILL BE DELETED IF THE USER CLOSES THE TAB
+======================================================== */
+window.addEventListener("beforeunload", () => {
+  if (pendingBookingId) {
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+    const url = `/booking/${pendingBookingId}`;
+    const data = new FormData();
+    data.append("_token", token);
+
+    navigator.sendBeacon(url, data);
+  }
+});
+

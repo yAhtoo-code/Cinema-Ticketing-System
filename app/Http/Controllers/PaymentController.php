@@ -29,10 +29,10 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        $booking = \App\Models\Booking::where('user_id', auth()->id())->latest('created_at')->first();
+        $booking = Booking::where('user_id', auth()->id())->latest('created_at')->first();
 
         // Create the payment record linked to that booking
-        $payment = \App\Models\Payment::create([
+        $payment = Payment::create([
             'date_time' => now(),
             'total_amount' => $request->input('total'),
             'booking_id' => $booking->id, 
