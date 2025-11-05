@@ -54,7 +54,7 @@
           <div class="flex flex-col items-center text-center">
             <img class="h-24 w-auto mb-4" src="{{ asset('images/logo.png') }}" alt="Cinematique Logo">
             <p class="text-gray-200 text-sm leading-relaxed max-w-md">
-              Experience the magic of cinema — from the latest blockbusters to timeless classics.
+              Experience the magic of cinema from the latest blockbusters to timeless classics.
               Book seats, grab popcorn, and make every movie night unforgettable.
             </p>
           </div>
