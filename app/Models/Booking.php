@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
-    protected $fillable = ['user_id', 'movie_id', 'movie_title', 'seats', 'date_time', ]; //'total_amount'
+    protected $fillable = ['user_id', 'movie_id', 'movie_title', 'cinema_type', 'seats', 'date_time', ]; //'total_amount'
 
     public function user()
     {

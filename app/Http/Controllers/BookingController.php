@@ -32,6 +32,7 @@ class BookingController extends Controller
             'user_id' => auth()->id(),
             'movie_id' => $request->input('movie_id'),
             'movie_title' => $request->input('movie_title'),
+            'cinema_type' => $request->input('cinema_type'),
             'seats' => $request->input('seats'),
             'date_time' => now(),
             // 'total_amount' => $request->input('total')

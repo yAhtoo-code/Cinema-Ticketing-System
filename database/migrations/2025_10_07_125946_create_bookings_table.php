@@ -16,10 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('movie_id');
             $table->string('movie_title', 100);
+            $table->string('cinema_type')->nullable();
             $table->string('seats')->nullable();
             $table->dateTime('date_time');
-            // $table->float('total_amount', 10, 2);
             $table->timestamps();
+            // $table->float('total_amount', 10, 2);
             // $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             // $table->foreignId('movie_id')->references('id')->on('movies')->onDelete('cascade');    
         });

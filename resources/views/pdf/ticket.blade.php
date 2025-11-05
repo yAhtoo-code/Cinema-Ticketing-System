@@ -86,6 +86,7 @@
       <div class="divider"></div>
       <p><span class="label">Total Payment:</span> ₱{{ number_format($payment->total_amount, 2) }}</p>
       <p><span class="label">Seats:</span> {{ $booking->seats }}</p>
+      <p><span class="label">Cinema Type:</span> {{ $booking->cinema_type }}</p>
     </div>
 
     <div class="divider"></div>

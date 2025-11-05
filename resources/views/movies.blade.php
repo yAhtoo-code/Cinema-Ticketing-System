@@ -1,6 +1,6 @@
 @extends('main')
 @section('content')
-    <div class="flex flex-wrap gap-2 p-5 ">
+    <div class="flex flex-wrap gap-2 p-5 mt-28 ">
     @foreach($genres as $genre)
     <button class="filter-btn text-white font-semibold border-gray-700 px-3 py-1 rounded-lg" data-genre="{{ $genre['data_genre'] }}">{{ $genre['title'] }}</button>
     @endforeach
@@ -11,7 +11,7 @@
         </div>
         
         <div class="container px-6 pb-8"> 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-12">
                 @foreach($movies as $movie)
                     <a href="{{ route('schedule', $movie->id) }}" 
                     class="bg-gray-900 rounded-lg overflow-hidden shadow-lg 

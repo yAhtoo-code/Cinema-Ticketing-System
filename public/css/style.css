@@ -12,11 +12,31 @@ header {
     height: 50px;
 }
 
+html,
 body {
-    background-image: url('../images/homepage_bg.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height: 100vh;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  background-image: url('../images/homepage_bg.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    background-color: #8E0204;
+    color: white;
+    padding: 2.5rem 0;
+    margin-top: auto;
 }

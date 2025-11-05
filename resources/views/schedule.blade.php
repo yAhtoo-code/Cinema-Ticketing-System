@@ -3,7 +3,7 @@
 
 <link href="{{ asset('css/schedule.css') }}" rel="stylesheet">
 
-<div class="container mx-auto px-4 pt-8 pb-1">
+<div class="container mx-auto px-4 pt-8 pb-1 mt-24">
   <h1 class="text-3xl text-white font-bold mb-6">Movie Schedule</h1>
 </div>
 
@@ -60,17 +60,17 @@
   <div class="section">
     <h3 class="text-white font-semibold pb-3">Select Cinema Type</h3>
     <div class="cinema-type" id="cinemaType">
-      <div class="cinema" data-price="250">
+      <div class="cinema" data-price="250" data-type="Standard">
         <h3>Standard</h3>
         <p>Regular screen and seating</p>
         <span>₱250</span>
       </div>
-      <div class="cinema" data-price="450">
+      <div class="cinema disabled" data-price="450" data-type="IMAX">
         <h3>IMAX</h3>
         <p>Enhanced visuals and sound</p>
         <span>₱450</span>
       </div>
-      <div class="cinema" data-price="600">
+      <div class="cinema disabled" data-price="600" data-type="Director’s Club">
         <h3>Director’s Club</h3>
         <p>Luxury experience</p>
         <span>₱600</span>

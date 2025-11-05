@@ -366,3 +366,8 @@ input {
     color: black;
     margin-top: 5px;
 }
+
+.cinema.disabled {
+    cursor: not-allowed;
+    background: #6e6d6d;
+}

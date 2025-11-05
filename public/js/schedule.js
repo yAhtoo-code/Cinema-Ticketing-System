@@ -62,11 +62,15 @@ handleOptionGroup("times");
    CINEMA TYPE SELECTION
 ================================= */
 let pricePerSeat = 250;
+let selectedCinemaType = "Standard";
+
 document.querySelectorAll(".cinema").forEach(cin => {
   cin.addEventListener("click", () => {
     document.querySelectorAll(".cinema").forEach(c => c.classList.remove("active"));
     cin.classList.add("active");
+
     pricePerSeat = parseInt(cin.dataset.price);
+    selectedCinemaType = cin.dataset.type;
     updateTotal();
   });
 });
@@ -222,6 +226,7 @@ proceedBtn.addEventListener("click", async () => {
   const bookingData = {
     movie_id: document.querySelector("#movie_id").value,
     movie_title: document.querySelector("#movie_title").value,
+    cinema_type: selectedCinemaType,
     seats: selected.join(","),
   };
 

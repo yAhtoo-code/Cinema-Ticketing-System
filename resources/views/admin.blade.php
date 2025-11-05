@@ -14,7 +14,6 @@
         <li data-target="manageSchedules">Manage Schedules</li>
         <li data-target="bookings">Bookings</li>
         <li data-target="cinemas">Cinemas</li>
-        <button onclick="window.location.href='{{ route('logout') }}'" class="mt-10 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Logout</button>
       </ul>
     </nav>
   </aside>
