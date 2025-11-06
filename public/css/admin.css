@@ -1,0 +1,109 @@
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+.sidebar {
+    opacity: 0.95;
+    margin-top: 82px;
+    width: 240px;
+    background-color: #8E0204;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 12px 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    color: white;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.sidebar ul li:hover {
+    color: black;
+    background: #FFC90D;
+}
+.sidebar ul li.active {
+    color: white;
+    background: #f33;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 90vh;
+    margin-left: 240px;
+}
+
+.movie-form {
+    background: #8E0204;
+    backdrop-filter: blur(10px);
+    padding: 20px 30px;
+    border-radius: 12px;
+    width: 600px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-family: inherit;
+}
+
+.btn-add {
+    background-color: #FFC90D;
+    color:white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-add:hover {
+    background-color: #e5b800;
+}
+
+.section.hidden {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+h1, p {
+    color: #FFC90D
+}

@@ -5,122 +5,136 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
-    font-family: "Poppins", sans-serif;
-  }
-  .movie_container {
+}
+
+.movie_container {
     max-width: 900px;
     margin: 10px auto;
     background: #8E0204;
     opacity: 0.85;
     padding: 30px;
     border-radius: 12px;
-  }
-  .branch {
+}
+
+.branch {
     color: white;
     font-size: 18px;
     margin-bottom: 5px;
-  }
-  h1 {
+}
+
+h1 {
     color: white;
     margin-bottom: 15px;
-    
-  }
-  .meta {
+}
+
+.meta {
     color: white;
     font-size: 14px;
-  }
-  .section {
+}
+
+.section {
     color: #030305;
     margin-top: 25px;
     border-top: 2px solid black;
     padding-top: 15px;
-  }
-  .cinema:hover {
+}
+
+.cinema:hover {
     background: #FFC90D;
-  }
-  .options {
+}
+
+.options {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-  }
-  .option {
+}
+
+.option {
     padding: 10px 18px;
     border-radius: 8px;
     background: #FFFFFF;
     cursor: pointer;
     transition: 0.3s;
-  }
-  .option:hover{
+}
+
+.option:hover {
     color: black;
     background: #FFC90D;
-  }
-  .option.active {
+}
+
+.option.active {
     color: white;
     background: #f33;
-  }
-  .cinema-type {
+}
+
+.cinema-type {
     display: flex;
     gap: 15px;
-  }
-  .cinema {
+}
+
+.cinema {
     flex: 1;
     background: #FFFFFF;
     padding: 15px;
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
-  }
-  .cinema.active  {
+}
+
+.cinema.active {
     color: white;
     background: #f33;
-  }
+}
 
-  .cinema h3 {
+.cinema h3 {
     margin: 0;
     font: black;
     font-size: 16px;
-  }
-  .cinema p {
+}
+
+.cinema p {
     color: black;
     font-size: 13px;
-  }
-  .cinema.active p {
-    color: white;
-  }
-  .cinema span {
-    font-weight: bold;
-  }
+}
 
-  .screen {
+.cinema.active p {
+    color: white;
+}
+
+.cinema span {
+    font-weight: bold;
+}
+
+.screen {
     text-align: center;
     margin: 20px 0;
-    color: #ccc;
+    color: white;
     letter-spacing: 2px;
-  }
+}
 
-  .seat-layout {
+.seat-layout {
     display: grid;
-    grid-template-columns: 40px auto;
+    grid-template-columns: 40px 1;
     gap: 10px;
-    align-items: start;
-  }
+    align-items: center;
+}
 
-  .row-labels {
+.row-labels {
     display: grid;
     grid-template-rows: repeat(8, 40px);
     align-items: center;
     justify-items: center;
     font-weight: bold;
     color: #ccc;
-  }
+}
 
-  .seat-section {
+.seat-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+}
 
-  .seat-numbers {
+.seat-numbers {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     gap: 10px;
@@ -128,34 +142,38 @@ body {
     color: #ccc;
     font-size: 13px;
     margin-bottom: 8px;
-  }
+}
 
-  .seat-grid {
+.seat-grid {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     gap: 10px;
     justify-items: center;
-  }
+}
 
-  .seat {
+.seat {
     width: 30px;
     height: 30px;
     cursor: pointer;
     fill: #555;
     transition: 0.2s;
-  }
-  .seat:hover {
+    justify-self: center;
+}
+
+.seat:hover {
     fill: #888;
-  }
-  .seat.selected {
+}
+
+.seat.selected {
     fill: #f33;
-  }
-  .seat.booked {
+}
+
+.seat.booked {
     fill: #222;
     cursor: not-allowed;
-  }
+}
 
-  .summary {
+.summary {
     margin-top: 25px;
     background: #FFFFFF;
     padding: 15px;
@@ -163,15 +181,193 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  .summary button {
+}
+
+.summary button {
     background: #FFC90D;
     color: #fff;
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
-  }
-  .summary button:disabled {
+}
+
+.summary button:disabled {
     background: #444;
     cursor: not-allowed;
-  }
+}
+
+.seat-wrapper {
+    display: grid;
+    grid-template-columns: 40px repeat(10, 1fr);
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.row-letter {
+    color: #ccc;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.seat-num {
+    color: #ccc;
+    font-size: 13px;
+    font-weight: 500;
+    justify-content: center;
+}
+
+/* Payment */
+.payment-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.payment-modal.hidden {
+    display: none;
+}
+
+.payment-content {
+    background: #fff;
+    color: #000;
+    border-radius: 12px;
+    padding: 30px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 0 20px rgba(255, 201, 13, 0.4);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.payment-content h2 {
+    color: black;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+select,
+input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 2px solid black;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.payment-total {
+    background: #f5f5f5;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.payment-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.payment-actions button {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#cancelPayment {
+    background: #ccc;
+    color: #000;
+}
+
+#cancelPayment:hover {
+    background: #aaa;
+}
+
+#confirmPayment {
+    background: #FFC90D;
+    color: #fff;
+}
+
+#confirmPayment:hover {
+    background: #e0b700;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🎟 CINEMATIQUE TICKET STYLE */
+.pdf-ticket {
+    background: #fff;
+    color: #000;
+    border-radius: 10px;
+    padding: 20px 25px;
+    width: 100%;
+    max-width: 420px;
+    font-family: "Poppins", sans-serif;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.ticket-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.ticket-header h2 {
+    font-size: 1.2rem;
+    color: #8E0204;
+    margin-top: 8px;
+}
+
+.ticket-footer {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px dashed #ccc;
+    padding-top: 10px;
+}
+
+.ticket-qr {
+    display: block;
+    margin: 10px auto;
+    width: 100px !important;
+    height: 100px !important;
+}
+
+.ticket-id {
+    font-size: 0.8rem;
+    color: black;
+    margin-top: 5px;
+}
+
+.cinema.disabled {
+    cursor: not-allowed;
+    background: #6e6d6d;
+}

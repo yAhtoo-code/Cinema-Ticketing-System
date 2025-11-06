@@ -13,42 +13,21 @@ class MovieController extends Controller
     public function index()
     {
         $genres = [
-            [
-                'title'=> 'All movies',
-                'data_genre' => 'all'
-            ], 
-            [
-                'title'=> 'Action',
-                'data_genre' => 'action'
-            ], 
-            [
-                'title'=> 'Adventure',
-                'data_genre' => 'adventure'
-            ],  
-            [
-                'title'=> 'Horror',
-                'data_genre' => 'horror'
-            ], 
-            [
-                'title'=> 'Thriller',
-                'data_genre' => 'thriller'
-            ],  
-            [
-                'title'=> 'Fantasy',
-                'data_genre' => 'fantasy'
-            ],
-            [
-                'title'=> 'Suspense',
-                'data_genre' => 'suspense'
-            ], 
-            [
-                'title'=> 'Sci-Fi',
-                'data_genre' => 'sci-fi'
-            ]
+            ['title'=> 'All Movies', 'data_genre' => 'all'],
+            ['title'=> 'Action', 'data_genre' => 'action'],
+            ['title'=> 'Adventure', 'data_genre' => 'adventure'],
+            ['title'=> 'Horror', 'data_genre' => 'horror'],
+            ['title'=> 'Thriller', 'data_genre' => 'thriller'],
+            ['title'=> 'Fantasy', 'data_genre' => 'fantasy'],
+            ['title'=> 'Suspense', 'data_genre' => 'suspense'],
+            ['title'=> 'Sci-Fi', 'data_genre' => 'sci-fi'],
         ];
-        return view('movies', [
-            'genres' => $genres,
-        ]);
+
+        // Fetch all movies from the database
+        $movies = Movie::all();
+
+        // Pass both $genres and $movies to the Blade view
+        return view('movies', compact('genres', 'movies'));
     }
 
     /**
@@ -70,9 +49,10 @@ class MovieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Movie $movie)
+    public function show($id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+        return view('schedule', compact('movie'));
     }
 
     /**

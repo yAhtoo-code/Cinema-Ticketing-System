@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); // e.g., 'Credit Card', 'PayPal'
+            $table->string('name'); // e.g., 'Credit Card', 'PayPal'
             $table->timestamps();
         });
     }

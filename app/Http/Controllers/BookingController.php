@@ -28,7 +28,35 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $booking = Booking::create([
+            'user_id' => auth()->id(),
+            'movie_id' => $request->input('movie_id'),
+            'movie_title' => $request->input('movie_title'),
+            'cinema_type' => $request->input('cinema_type'),
+            'seats' => $request->input('seats'),
+            'date_time' => now(),
+            // 'total_amount' => $request->input('total')
+        ]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Booking created successfully!',
+            'booking_id' => $booking->id,
+        ]);
+    }
+
+    public function getBookedSeats($movie_id)
+    {
+        // Fetch booked seat data properly
+        $bookings = Booking::where('movie_id', $movie_id)->pluck('seats');
+
+        $bookedSeats = [];
+        foreach ($bookings as $seatString) {
+            if (!empty($seatString)) {
+                $bookedSeats = array_merge($bookedSeats, explode(',', $seatString));
+            }
+        }
+
+        return response()->json($bookedSeats);
     }
 
     /**
@@ -58,8 +86,15 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Booking $booking)
+    public function destroy($id)
     {
-        //
+        $booking = Booking::find($id);
+
+        if ($booking) {
+            $booking->delete();
+            return response()->json(['success' => true, 'message' => 'Unpaid booking deleted']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Booking not found'], 404);
     }
 }
