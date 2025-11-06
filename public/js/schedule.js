@@ -287,7 +287,7 @@ confirmPayment.addEventListener("click", async (e) => {
     const result = await response.json();
 
     if (response.ok && result.success) {
-      alert(result.message || "Payment Successful!");
+      alert("Payment Successfull!");
       paymentContent.classList.add("hidden");
       paymentSuccess.classList.remove("hidden");
       pendingBookingId = null;

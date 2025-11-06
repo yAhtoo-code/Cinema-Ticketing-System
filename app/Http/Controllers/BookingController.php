@@ -39,7 +39,6 @@ class BookingController extends Controller
         ]);
         return response()->json([
             'success' => true,
-            'message' => 'Booking created successfully!',
             'booking_id' => $booking->id,
         ]);
     }

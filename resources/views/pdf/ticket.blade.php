@@ -8,15 +8,16 @@
       font-family: DejaVu Sans, sans-serif;
       margin: 0;
       padding: 40px;
-      color: white;
-      background: black;
+      color: #fff;
+      background: #111;
     }
 
     .ticket {
       background: #e7000b;
-      border: 4px solid #FFC90D;
-      border-radius: 10px;
-      padding: 30px 40px;
+      border: 3px solid #FFC90D;
+      border-radius: 12px;
+      padding: 35px 40px;
+      box-shadow: 0 0 20px rgba(255, 201, 13, 0.3);
       max-width: 600px;
       margin: 0 auto;
       position: relative;
@@ -73,12 +74,15 @@
     <div class="header">
       <img src="{{ public_path('images/logo.png') }}" alt="Cinematique Logo">
       <div class="title">CINEMATIQUE ONLINE TICKET</div>
+      
     </div>
 
     <div class="info">
-      <p><span class="label">Transaction Date/Time(UTC):</span> {{ $payment->created_at->format('F j, Y g:i A') }}</p>
+      <p><span class="label">Transaction Date/Time:</span> {{ $payment->created_at->timezone('Asia/Manila')->format('F j, Y g:i A') }}</p>
+      <p><span class="label">Booking ID:</span> {{ $booking->id }}</p>
       <div class="divider"></div>
 
+      <p><span class="label">Branch:</span> {{ $booking->branch ?? 'N/A' }}</p>
       <p><span class="label">Movie:</span> {{ $booking->movie->title }}</p>
       <p><span class="label">Screening Time:</span> {{ $booking->screening_time ?? 'N/A' }}</p>
       <p><span class="label">Screening Date:</span> {{ $booking->screening_date ?? 'N/A' }}</p>
@@ -89,11 +93,11 @@
       <p><span class="label">Cinema Type:</span> {{ $booking->cinema_type }}</p>
     </div>
 
-    <div class="divider"></div>
+      <div class="divider"></div>
 
     <div class="footer">
-      <p>Thank you for booking with <strong>Cinematique</strong>!</p>
-      <p>Please present this ticket at the cinema entrance.</p>
+      <p>Need help? Contact <strong>support@cinematique.com</strong></p>
+      <p><em>This ticket is valid only with matching ID and payment confirmation.</em></p>
     </div>
   </div>
 </body>

@@ -19,7 +19,6 @@ class TicketController extends Controller
                           ->latest('created_at')
                           ->first();
 
-        // Pass BOTH booking and payment to the Blade view
         $pdf = Pdf::loadView('pdf.ticket', compact('booking', 'payment'));
 
         // Download the PDF file
